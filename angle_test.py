@@ -46,7 +46,7 @@ detector = vision.PoseLandmarker.create_from_options(options)
 # Webcam
 # ====================================
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 timestamp = 0
 
@@ -56,8 +56,6 @@ while cap.isOpened():
 
     if not success:
         break
-
-    frame = cv2.flip(frame, 1)
 
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
