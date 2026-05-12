@@ -46,21 +46,19 @@ class SquatAnalyzer(BaseExercise):
 
         # INITIAL HIP POSITION
         if self.initial_hip_y is None:
-            self.initial_hip_y = hip_l.y
+            
+            self.initial_hip_y = (
+                hip_l.y + hip_r.y
+            ) / 2
 
-            #self.initial_hip_y = (
-            #    hip_l.y + hip_r.y
-            #) / 2
+        current_hip_y = (
+            hip_l.y + hip_r.y
+        ) / 2
 
-        #current_hip_y = (
-        #    hip_l.y + hip_r.y
-        #) / 2
-
-        hip_drop = hip_l.y - self.initial_hip_y
-        #hip_drop = (
-        #    current_hip_y -
-        #    self.initial_hip_y
-        #)
+        hip_drop = (
+            current_hip_y -
+            self.initial_hip_y
+        )
 
         # ===================================
         # FEEDBACK + REP LOGIC
@@ -68,23 +66,15 @@ class SquatAnalyzer(BaseExercise):
 
         if symmetry_diff > 20:
             self.feedback = "Balance Your Weight"
-
-        elif avg_angle < 100 and hip_drop > 0.18:
-            self.feedback = "Lower Your Hips"
-
-        elif avg_angle < 70 and hip_drop > 0.28:
+        elif avg_angle < 70 and hip_drop > 0.25:
             self.stage = "down"
             self.feedback = "Good Form"
-
+        elif avg_angle < 100 and hip_drop > 0.18:
+            self.feedback = "Lower Your Hips"
         else:
-            self.feedback = "None"
+            self.feedback = "Standing"
 
-        if (
-            avg_angle > 160 and
-            hip_drop < 0.05 and
-            self.stage == "down"
-        ):
-
+        if avg_angle > 160 and hip_drop < 0.05 and self.stage == "down":
             self.stage = "up"
             self.counter += 1
             self.feedback = "Good Rep"

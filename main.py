@@ -98,7 +98,7 @@ while cap.isOpened():
 
         cv2.putText(
             frame,
-            f"Hip Drop: {int(data['hip_drop'])}",
+            f"Hip Drop: {data['hip_drop']:.2f}",
             (20, 350),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
