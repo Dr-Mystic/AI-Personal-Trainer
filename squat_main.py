@@ -34,7 +34,7 @@ while cap.isOpened():
             landmarks
         )
 
-        threading.Thread(target=squat_analyzer.audio_feedback).start()
+        squat_analyzer.audio_feedback()
 
         draw_landmarks(frame, landmarks)
 

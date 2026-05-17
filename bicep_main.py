@@ -1,5 +1,5 @@
 import cv2
-import threading
+
 from core.pose_detector import PoseDetector
 from core.exercises.bicep_curl_analyzer import BicepCurlAnalyzer
 from core.drawing_utils import draw_landmarks
@@ -35,7 +35,7 @@ while cap.isOpened():
             landmarks
         )
 
-        threading.Thread(target=bicep_analyzer.audio_feedback).start()
+        bicep_analyzer.audio_feedback()
 
         draw_landmarks(frame, landmarks)
 
@@ -61,7 +61,7 @@ while cap.isOpened():
 
         cv2.putText(
             frame,
-            f"Left Stage: {data['left_stage']}",
+            f"Left Stage: {data['right_stage']}",
             (20, 150),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
@@ -71,7 +71,7 @@ while cap.isOpened():
 
         cv2.putText(
             frame,
-            f"Right Stage: {data['right_stage']}",
+            f"Right Stage: {data['left_stage']}",
             (20, 200),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
@@ -81,7 +81,7 @@ while cap.isOpened():
 
         cv2.putText(
             frame,
-            f"Left Angle: {int(data['left_angle'])}",
+            f"Left Angle: {int(data['right_angle'])}",
             (20, 250),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
@@ -91,7 +91,7 @@ while cap.isOpened():
 
         cv2.putText(
             frame,
-            f"Right Angle: {int(data['right_angle'])}",
+            f"Right Angle: {int(data['left_angle'])}",
             (20, 300),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,

@@ -59,10 +59,14 @@ class BicepCurlAnalyzer(BaseExercise):
         # LEFT ARM LOGIC
         # ======================================
 
-        if left_angle < 45:
+        if left_angle < 45 and self.left_stage == "down":
 
             self.left_stage = "up"
             self.feedback = "Lower Slowly"
+
+        elif left_angle > 170:
+
+            self.feedback = "Curl Up"
 
         elif left_angle > 150 and self.left_stage == "up":
 
@@ -74,12 +78,16 @@ class BicepCurlAnalyzer(BaseExercise):
         # RIGHT ARM LOGIC
         # ======================================
 
-        if right_angle < 45:
+        if right_angle < 45 and self.right_stage == "down":
 
             self.right_stage = "up"
             self.feedback = "Lower Slowly"
 
-        if right_angle > 150 and self.right_stage == "up":
+        elif right_angle > 170:
+
+            self.feedback = "Curl Up"
+        
+        elif right_angle > 150 and self.right_stage == "up":
 
             self.right_stage = "down"
             self.right_counter += 1
