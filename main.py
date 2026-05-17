@@ -1,5 +1,5 @@
 import cv2
-
+import threading
 from core.pose_detector import PoseDetector
 from core.exercises.squat_analyzer import SquatAnalyzer
 from core.drawing_utils import draw_landmarks
@@ -33,6 +33,8 @@ while cap.isOpened():
         data = squat_analyzer.process(
             landmarks
         )
+
+        threading.Thread(target=squat_analyzer.audio_feedback).start()
 
         draw_landmarks(frame, landmarks)
 
