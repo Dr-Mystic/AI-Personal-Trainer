@@ -7,11 +7,6 @@ class CrunchAnalyzer(BaseExercise):
     def __init__(self):
         super().__init__()
 
-        self.up_threshold = 150
-        self.down_threshold = 100
-
-        self.stage = "None"
-
     def get_midpoint(self, a, b):
         return (
             (a.x + b.x) / 2,
@@ -35,11 +30,12 @@ class CrunchAnalyzer(BaseExercise):
 
         shoulder_mid = self.get_midpoint(shoulder_l, shoulder_r)
         hip_mid = self.get_midpoint(hip_l, hip_r)
+        knee_mid = self.get_midpoint(knee_l, knee_r)
 
         torso_angle = calculate_angle(
             shoulder_mid,
             hip_mid,
-            (hip_mid[0], hip_mid[1] + 1e-3)
+            knee_mid
         )
 
         left_knee_angle = calculate_angle(
@@ -56,24 +52,23 @@ class CrunchAnalyzer(BaseExercise):
 
         avg_knee_angle = (left_knee_angle + right_knee_angle) / 2
 
-        if (avg_knee_angle < 45):
+        if (avg_knee_angle < 60):
 
-            if torso_angle > self.up_threshold and self.stage == "down":
+            if torso_angle < 45 and self.stage == "down":
                 self.counter += 1
                 self.stage = "up"
                 self.feedback = "Good crunch"
 
-            elif torso_angle < self.down_threshold:
+            elif 45 <= torso_angle <= 95:
                 self.stage = "down"
                 self.feedback = "Contract core"
+
+            elif torso_angle > 110:
+                self.feedback = "Don't lay back"
 
             neck_offset = abs(nose.x - shoulder_mid[0])
             if neck_offset > 0.1:
                 self.feedback = "Stop pulling neck"
-
-            if torso_angle < 90:
-                self.stage = "Laying down"
-                self.feedback = "Don't lay back"
         
         else:
             self.feedback = "Bring up your legs"
