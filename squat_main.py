@@ -1,5 +1,5 @@
 import cv2
-import threading
+
 from core.pose_detector import PoseDetector
 from core.exercises.squat_analyzer import SquatAnalyzer
 from core.drawing_utils import draw_landmarks
