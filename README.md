@@ -208,9 +208,9 @@ Final Year Project
 
 ## Contributors
 
-**Muhammad Farooq Nawaz Khan**
-**Muhammad Ali Nawaz**
-**Ahmad Waheed**
+* **Muhammad Farooq Nawaz Khan**
+* **Muhammad Ali Nawaz**
+* **Ahmad Waheed**
 
 Project development was carried out collaboratively with project teammates, including separate development work that was later integrated into the final application.
 
