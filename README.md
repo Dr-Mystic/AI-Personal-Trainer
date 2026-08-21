@@ -104,7 +104,7 @@ For running the application from source, the following are required:
 Clone the repository:
 
 ```bash
-git clone https://github.com/Dr-Mystic/AI-Personal-Trainer
+git clone https://github.com/Dr-Mystic/AI-Personal-Trainer.git
 cd AI-Personal-Trainer
 ```
 
